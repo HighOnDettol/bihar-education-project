@@ -12,8 +12,6 @@
             --color-background-white: #FFFFFF; /* Pure White */
             --color-text-black: #333333; /* Dark Grey for text */
             --color-light-grey: #E0E0E0; /* For borders and subtle accents */
-            --color-accent-gold: #ffc700; /* For stars */
-            --color-accent-gold-hover: #deb217; /* For star hover */
         }
 
         /* General Body Styling */
@@ -24,10 +22,11 @@
             color: var(--color-text-black);
             line-height: 1.6;
             padding: 20px;
+            box-sizing: border-box; /* Include padding in element's total width/height */
         }
 
         /* Header Section Styling */
-     .header-section {
+      .header-section {
             background-color: var(--color-primary-blue);
             color: var(--color-background-white);
             padding: 30px 40px;
@@ -37,29 +36,30 @@
             max-width: 900px;
             margin-left: auto;
             margin-right: auto;
+            box-sizing: border-box;
         }
 
-     .header-section h1 {
+      .header-section h1 {
             font-size: 2.5em;
             margin-top: 0;
             margin-bottom: 10px;
             text-align: center;
         }
 
-     .header-section h2 {
+      .header-section h2 {
             font-size: 1.5em;
             margin-bottom: 20px;
             text-align: center;
             font-weight: normal;
         }
 
-     .header-section p {
+      .header-section p {
             font-size: 1.1em;
             margin-bottom: 10px;
         }
 
         /* Language Switcher Styling */
-     .language-selector-container {
+      .language-selector-container {
             text-align: center;
             margin-bottom: 30px;
             background-color: var(--color-background-white);
@@ -69,9 +69,10 @@
             max-width: 400px;
             margin-left: auto;
             margin-right: auto;
+            box-sizing: border-box;
         }
 
-     .language-selector-container label {
+      .language-selector-container label {
             display: inline-block;
             margin: 0 15px;
             padding: 10px 25px;
@@ -85,33 +86,34 @@
             font-size: 1.1em;
         }
 
-     .language-selector-container input[type="radio"] {
+      .language-selector-container input[type="radio"] {
             display: none; /* Hide the actual radio button */
         }
 
-     .language-selector-container input[type="radio"]:checked + label {
+      .language-selector-container input[type="radio"]:checked + label {
             background-color: var(--color-primary-blue);
             color: var(--color-background-white);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-     .language-selector-container label:hover {
+      .language-selector-container label:hover {
             background-color: var(--color-primary-blue);
             color: var(--color-background-white);
             transform: translateY(-2px);
         }
 
         /* Questionnaire Section Styling */
-     .questionnaire-section {
+      .questionnaire-section {
             background-color: var(--color-background-white);
             padding: 30px 40px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             max-width: 800px;
             margin: 0 auto 30px auto; /* Center and add bottom margin */
+            box-sizing: border-box;
         }
 
-     .questionnaire-section h3 {
+      .questionnaire-section h3 {
             color: var(--color-primary-blue);
             font-size: 1.8em;
             margin-top: 0;
@@ -133,12 +135,12 @@
         input[type="number"],
         textarea,
         select {
-            width: calc(100% - 24px); /* Account for padding and border */
+            width: 100%; /* Full width of parent */
             padding: 12px;
             margin-bottom: 20px;
             border: 1px solid var(--color-light-grey);
             border-radius: 6px;
-            box-sizing: border-box;
+            box-sizing: border-box; /* Include padding and border in width */
             font-size: 1em;
             color: var(--color-text-black);
             background-color: #fcfcfc;
@@ -203,45 +205,6 @@
             transform: translateY(-2px);
         }
 
-        /* Star Rating System CSS */
-     .rate {
-            float: left;
-            height: 46px;
-            padding: 0 10px;
-            margin-bottom: 20px; /* Add margin below stars */
-        }
-     .rate:not(:checked) > input {
-            position: absolute;
-            top: -9999px; /* Hide radio buttons */
-        }
-     .rate:not(:checked) > label {
-            float: right;
-            width: 1em;
-            overflow: hidden;
-            white-space: nowrap;
-            cursor: pointer;
-            font-size: 30px;
-            color: var(--color-light-grey); /* Unselected star color */
-            transition: color 0.2s ease;
-        }
-     .rate:not(:checked) > label:before {
-            content: '★ '; /* Star character */
-        }
-     .rate > input:checked ~ label {
-            color: var(--color-accent-gold); /* Selected star color */
-        }
-     .rate:not(:checked) > label:hover,
-     .rate:not(:checked) > label:hover ~ label {
-            color: var(--color-accent-gold-hover); /* Hover color */
-        }
-     .rate > input:checked + label:hover,
-     .rate > input:checked + label:hover ~ label,
-     .rate > input:checked ~ label:hover,
-     .rate > input:checked ~ label:hover ~ label,
-     .rate > label:hover ~ input:checked ~ label {
-            color: var(--color-accent-gold-hover); /* More intense hover color */
-        }
-
         /* Language Toggle Logic */
         /* Hide the actual radio buttons */
         input[type="radio"][name="language-choice"] {
@@ -272,12 +235,51 @@
             display: block;
         }
 
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+          .header-section,.questionnaire-section,.language-selector-container {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+          .header-section h1 {
+                font-size: 1.8em;
+            }
+          .header-section h2 {
+                font-size: 1.2em;
+            }
+          .header-section p {
+                font-size: 0.95em;
+            }
+          .questionnaire-section h3 {
+                font-size: 1.5em;
+            }
+          .language-selector-container label {
+                margin: 0 8px;
+                padding: 8px 18px;
+                font-size: 1em;
+            }
+            input[type="text"], input[type="number"], textarea, select {
+                padding: 10px;
+                margin-bottom: 15px;
+            }
+            button[type="submit"] {
+                padding: 10px 20px;
+                font-size: 1.1em;
+            }
+        }
 
-        /* Clearfix for floated elements */
-     .rate::after {
-            content: "";
-            display: table;
-            clear: both;
+        @media (max-width: 480px) {
+          .header-section,.questionnaire-section,.language-selector-container {
+                padding: 15px;
+            }
+          .language-selector-container label {
+                margin: 0 5px;
+                padding: 6px 12px;
+                font-size: 0.9em;
+            }
         }
     </style>
 </head>
@@ -401,14 +403,17 @@
             <input type="radio" id="salary_never_en" name="salary_on_time_en" value="never">
             <label for="salary_never_en">Never on time</label><br>
 
-            <p>2) Rate the quality of mid-day meal. (5 stars)</p>
-            <div class="rate">
-                <input type="radio" id="mid_day_meal_star5_en" name="mid_day_meal_rating_en" value="5" /><label for="mid_day_meal_star5_en" title="5 stars"></label>
-                <input type="radio" id="mid_day_meal_star4_en" name="mid_day_meal_rating_en" value="4" /><label for="mid_day_meal_star4_en" title="4 stars"></label>
-                <input type="radio" id="mid_day_meal_star3_en" name="mid_day_meal_rating_en" value="3" /><label for="mid_day_meal_star3_en" title="3 stars"></label>
-                <input type="radio" id="mid_day_meal_star2_en" name="mid_day_meal_rating_en" value="2" /><label for="mid_day_meal_star2_en" title="2 stars"></label>
-                <input type="radio" id="mid_day_meal_star1_en" name="mid_day_meal_rating_en" value="1" /><label for="mid_day_meal_star1_en" title="1 star"></label>
-            </div><br>
+            <p>2) Rate the quality of mid-day meal.</p>
+            <input type="radio" id="mid_day_meal_rating_1_en" name="mid_day_meal_rating_en" value="1">
+            <label for="mid_day_meal_rating_1_en">1</label><br>
+            <input type="radio" id="mid_day_meal_rating_2_en" name="mid_day_meal_rating_en" value="2">
+            <label for="mid_day_meal_rating_2_en">2</label><br>
+            <input type="radio" id="mid_day_meal_rating_3_en" name="mid_day_meal_rating_en" value="3">
+            <label for="mid_day_meal_rating_3_en">3</label><br>
+            <input type="radio" id="mid_day_meal_rating_4_en" name="mid_day_meal_rating_en" value="4">
+            <label for="mid_day_meal_rating_4_en">4</label><br>
+            <input type="radio" id="mid_day_meal_rating_5_en" name="mid_day_meal_rating_en" value="5">
+            <label for="mid_day_meal_rating_5_en">5</label><br>
 
             <p>3) How would you rate the adequacy of funds your school receives for its daily needs (e.g., teaching materials, maintenance)?</p>
             <input type="radio" id="funds_adequacy_very_adequate_en" name="funds_adequacy_en" value="very_adequate">
@@ -498,18 +503,21 @@
             <label for="absenteeism_non_teaching_en">Engagement in non-teaching duties</label><br>
             <input type="radio" id="absenteeism_difficulty_en" name="absenteeism_reason_en" value="difficulty_reaching_school">
             <label for="absenteeism_difficulty_en">Difficulty in reaching school (transport, infrastructure)</label><br>
-            <input type="radio" id="absenteeism_other_en" name="absenteeism_reason_en" value="other">
+            <input type="radio" id="absenteeism_other_en" name="absenteeism_en" value="other">
             <label for="absenteeism_other_en">Other (Please specify):</label>
             <input type="text" id="absenteeism_other_text_en" name="absenteeism_other_text_en" style="margin-left: 5px;"><br>
 
-            <p>10) How would you rate the overall quality of your school's infrastructure (classrooms, toilets, water, etc.)? (5 stars)</p>
-            <div class="rate">
-                <input type="radio" id="infrastructure_star5_en" name="infrastructure_rating_en" value="5" /><label for="infrastructure_star5_en" title="5 stars"></label>
-                <input type="radio" id="infrastructure_star4_en" name="infrastructure_rating_en" value="4" /><label for="infrastructure_star4_en" title="4 stars"></label>
-                <input type="radio" id="infrastructure_star3_en" name="infrastructure_rating_en" value="3" /><label for="infrastructure_star3_en" title="3 stars"></label>
-                <input type="radio" id="infrastructure_star2_en" name="infrastructure_rating_en" value="2" /><label for="infrastructure_star2_en" title="2 stars"></label>
-                <input type="radio" id="infrastructure_star1_en" name="infrastructure_rating_en" value="1" /><label for="infrastructure_star1_en" title="1 star"></label>
-            </div><br>
+            <p>10) How would you rate the overall quality of your school's infrastructure (classrooms, toilets, water, etc.)?</p>
+            <input type="radio" id="infrastructure_rating_1_en" name="infrastructure_rating_en" value="1">
+            <label for="infrastructure_rating_1_en">1</label><br>
+            <input type="radio" id="infrastructure_rating_2_en" name="infrastructure_rating_en" value="2">
+            <label for="infrastructure_rating_2_en">2</label><br>
+            <input type="radio" id="infrastructure_rating_3_en" name="infrastructure_rating_en" value="3">
+            <label for="infrastructure_rating_3_en">3</label><br>
+            <input type="radio" id="infrastructure_rating_4_en" name="infrastructure_rating_en" value="4">
+            <label for="infrastructure_rating_4_en">4</label><br>
+            <input type="radio" id="infrastructure_rating_5_en" name="infrastructure_rating_en" value="5">
+            <label for="infrastructure_rating_5_en">5</label><br>
 
             <p>11) What percentage of your school's allocated infrastructure (e.g., classrooms, labs, toilets) is fully functional and regularly utilized?</p>
             <input type="radio" id="infra_functional_90_100_en" name="infra_functional_en" value="90-100%">
@@ -552,14 +560,17 @@
             <label for="challenge_other_en">Other (Please specify):</label>
             <input type="text" id="challenge_other_text_en" name="challenge_other_text_en" style="margin-left: 5px;"><br>
 
-            <p>14) Overall, how would you rate the quality of education provided in your government school? (5 stars)</p>
-            <div class="rate">
-                <input type="radio" id="education_quality_star5_en" name="education_quality_rating_en" value="5" /><label for="education_quality_star5_en" title="5 stars"></label>
-                <input type="radio" id="education_quality_star4_en" name="education_quality_rating_en" value="4" /><label for="education_quality_star4_en" title="4 stars"></label>
-                <input type="radio" id="education_quality_star3_en" name="education_quality_rating_en" value="3" /><label for="education_quality_star3_en" title="3 stars"></label>
-                <input type="radio" id="education_quality_star2_en" name="education_quality_rating_en" value="2" /><label for="education_quality_star2_en" title="2 stars"></label>
-                <input type="radio" id="education_quality_star1_en" name="education_quality_rating_en" value="1" /><label for="education_quality_star1_en" title="1 star"></label>
-            </div><br>
+            <p>14) Overall, how would you rate the quality of education provided in your government school?</p>
+            <input type="radio" id="education_quality_rating_1_en" name="education_quality_rating_en" value="1">
+            <label for="education_quality_rating_1_en">1</label><br>
+            <input type="radio" id="education_quality_rating_2_en" name="education_quality_rating_en" value="2">
+            <label for="education_quality_rating_2_en">2</label><br>
+            <input type="radio" id="education_quality_rating_3_en" name="education_quality_rating_en" value="3">
+            <label for="education_quality_rating_3_en">3</label><br>
+            <input type="radio" id="education_quality_rating_4_en" name="education_quality_rating_en" value="4">
+            <label for="education_quality_rating_4_en">4</label><br>
+            <input type="radio" id="education_quality_rating_5_en" name="education_quality_rating_en" value="5">
+            <label for="education_quality_rating_5_en">5</label><br>
 
             <p>15) Were there any post-covid remedial measures taken to regain the academic loss?</p>
             <input type="radio" id="covid_remedial_no_en" name="covid_remedial_en" value="not_at_all">
@@ -723,14 +734,17 @@
             <input type="radio" id="salary_never_hi" name="salary_on_time_hi" value="समय_पर_कभी_नहीं">
             <label for="salary_never_hi">समय पर कभी नहीं</label><br>
 
-            <p>2) मिड-डे भोजन की गुणवत्ता की दर। (5 stars)</p>
-            <div class="rate">
-                <input type="radio" id="mid_day_meal_star5_hi" name="mid_day_meal_rating_hi" value="5" /><label for="mid_day_meal_star5_hi" title="5 stars"></label>
-                <input type="radio" id="mid_day_meal_star4_hi" name="mid_day_meal_rating_hi" value="4" /><label for="mid_day_meal_star4_hi" title="4 stars"></label>
-                <input type="radio" id="mid_day_meal_star3_hi" name="mid_day_meal_rating_hi" value="3" /><label for="mid_day_meal_star3_hi" title="3 stars"></label>
-                <input type="radio" id="mid_day_meal_star2_hi" name="mid_day_meal_rating_hi" value="2" /><label for="mid_day_meal_star2_hi" title="2 stars"></label>
-                <input type="radio" id="mid_day_meal_star1_hi" name="mid_day_meal_rating_hi" value="1" /><label for="mid_day_meal_star1_hi" title="1 star"></label>
-            </div><br>
+            <p>2) मिड-डे भोजन की गुणवत्ता की दर।</p>
+            <input type="radio" id="mid_day_meal_rating_1_hi" name="mid_day_meal_rating_hi" value="1">
+            <label for="mid_day_meal_rating_1_hi">1</label><br>
+            <input type="radio" id="mid_day_meal_rating_2_hi" name="mid_day_meal_rating_hi" value="2">
+            <label for="mid_day_meal_rating_2_hi">2</label><br>
+            <input type="radio" id="mid_day_meal_rating_3_hi" name="mid_day_meal_rating_hi" value="3">
+            <label for="mid_day_meal_rating_3_hi">3</label><br>
+            <input type="radio" id="mid_day_meal_rating_4_hi" name="mid_day_meal_rating_hi" value="4">
+            <label for="mid_day_meal_rating_4_hi">4</label><br>
+            <input type="radio" id="mid_day_meal_rating_5_hi" name="mid_day_meal_rating_hi" value="5">
+            <label for="mid_day_meal_rating_5_hi">5</label><br>
 
             <p>3) आप अपने स्कूल को अपनी दैनिक आवश्यकताओं (जैसे, शिक्षण सामग्री, रखरखाव) के लिए प्राप्त धन की पर्याप्तता को कैसे रेट करेंगे?</p>
             <input type="radio" id="funds_adequacy_very_adequate_hi" name="funds_adequacy_hi" value="बहुत_पर्याप्त_है">
@@ -820,18 +834,21 @@
             <label for="absenteeism_non_teaching_hi">गैर-शिक्षण कर्तव्यों में सगाई</label><br>
             <input type="radio" id="absenteeism_difficulty_hi" name="absenteeism_reason_hi" value="स्कूल_तक_पहुंचने_में_कठिनाई">
             <label for="absenteeism_difficulty_hi">स्कूल तक पहुंचने में कठिनाई (परिवहन, बुनियादी ढांचा)</label><br>
-            <input type="radio" id="absenteeism_other_hi" name="absenteeism_other_hi" value="अन्य">
+            <input type="radio" id="absenteeism_other_hi" name="absenteeism_hi" value="अन्य">
             <label for="absenteeism_other_hi">अन्य (कृपया निर्दिष्ट करें):</label>
             <input type="text" id="absenteeism_other_text_hi" name="absenteeism_other_text_hi" style="margin-left: 5px;"><br>
 
-            <p>10) आप अपने स्कूल के बुनियादी ढांचे (कक्षाओं, शौचालय, पानी, आदि) की समग्र गुणवत्ता को कैसे रेट करेंगे? (5 stars)</p>
-            <div class="rate">
-                <input type="radio" id="infrastructure_star5_hi" name="infrastructure_rating_hi" value="5" /><label for="infrastructure_star5_hi" title="5 stars"></label>
-                <input type="radio" id="infrastructure_star4_hi" name="infrastructure_rating_hi" value="4" /><label for="infrastructure_star4_hi" title="4 stars"></label>
-                <input type="radio" id="infrastructure_star3_hi" name="infrastructure_rating_hi" value="3" /><label for="infrastructure_star3_hi" title="3 stars"></label>
-                <input type="radio" id="infrastructure_star2_hi" name="infrastructure_rating_hi" value="2" /><label for="infrastructure_star2_hi" title="2 stars"></label>
-                <input type="radio" id="infrastructure_star1_hi" name="infrastructure_rating_hi" value="1" /><label for="infrastructure_star1_hi" title="1 star"></label>
-            </div><br>
+            <p>10) आप अपने स्कूल के बुनियादी ढांचे (कक्षाओं, शौचालय, पानी, आदि) की समग्र गुणवत्ता को कैसे रेट करेंगे?</p>
+            <input type="radio" id="infrastructure_rating_1_hi" name="infrastructure_rating_hi" value="1">
+            <label for="infrastructure_rating_1_hi">1</label><br>
+            <input type="radio" id="infrastructure_rating_2_hi" name="infrastructure_rating_hi" value="2">
+            <label for="infrastructure_rating_2_hi">2</label><br>
+            <input type="radio" id="infrastructure_rating_3_hi" name="infrastructure_rating_hi" value="3">
+            <label for="infrastructure_rating_3_hi">3</label><br>
+            <input type="radio" id="infrastructure_rating_4_hi" name="infrastructure_rating_hi" value="4">
+            <label for="infrastructure_rating_4_hi">4</label><br>
+            <input type="radio" id="infrastructure_rating_5_hi" name="infrastructure_rating_hi" value="5">
+            <label for="infrastructure_rating_5_hi">5</label><br>
 
             <p>11) आपके स्कूल के आवंटित बुनियादी ढांचे का कितना प्रतिशत (जैसे, कक्षा, प्रयोगशाला, शौचालय) पूरी तरह से कार्यात्मक और नियमित रूप से उपयोग किया जाता है?</p>
             <input type="radio" id="infra_functional_90_100_hi" name="infra_functional_hi" value="90-100%">
@@ -874,14 +891,17 @@
             <label for="challenge_other_hi">अन्य (कृपया निर्दिष्ट करें):</label>
             <input type="text" id="challenge_other_text_hi" name="challenge_other_text_hi" style="margin-left: 5px;"><br>
 
-            <p>14) कुल मिलाकर, आप अपने सरकारी स्कूल में प्रदान की गई शिक्षा की गुणवत्ता को कैसे रेट करेंगे? (5 stars)</p>
-            <div class="rate">
-                <input type="radio" id="education_quality_star5_hi" name="education_quality_rating_hi" value="5" /><label for="education_quality_star5_hi" title="5 stars"></label>
-                <input type="radio" id="education_quality_star4_hi" name="education_quality_rating_hi" value="4" /><label for="education_quality_star4_hi" title="4 stars"></label>
-                <input type="radio" id="education_quality_star3_hi" name="education_quality_rating_hi" value="3" /><label for="education_quality_star3_hi" title="3 stars"></label>
-                <input type="radio" id="education_quality_star2_hi" name="education_quality_rating_hi" value="2" /><label for="education_quality_star2_hi" title="2 stars"></label>
-                <input type="radio" id="education_quality_star1_hi" name="education_quality_rating_hi" value="1" /><label for="education_quality_star1_hi" title="1 star"></label>
-            </div><br>
+            <p>14) कुल मिलाकर, आप अपने सरकारी स्कूल में प्रदान की गई शिक्षा की गुणवत्ता को कैसे रेट करेंगे?</p>
+            <input type="radio" id="education_quality_rating_1_hi" name="education_quality_rating_hi" value="1">
+            <label for="education_quality_rating_1_hi">1</label><br>
+            <input type="radio" id="education_quality_rating_2_hi" name="education_quality_rating_hi" value="2">
+            <label for="education_quality_rating_2_hi">2</label><br>
+            <input type="radio" id="education_quality_rating_3_hi" name="education_quality_rating_hi" value="3">
+            <label for="education_quality_rating_3_hi">3</label><br>
+            <input type="radio" id="education_quality_rating_4_hi" name="education_quality_rating_hi" value="4">
+            <label for="education_quality_rating_4_hi">4</label><br>
+            <input type="radio" id="education_quality_rating_5_hi" name="education_quality_rating_hi" value="5">
+            <label for="education_quality_rating_5_hi">5</label><br>
 
             <p>15) क्या अकादमिक नुकसान को फिर से हासिल करने के लिए कोई पोस्ट-कोविड उपचारात्मक उपाय किए गए थे?</p>
             <input type="radio" id="covid_remedial_no_hi" name="covid_remedial_hi" value="बिल्कुल_नहीं">
@@ -934,6 +954,8 @@
             <label for="labs_not_so_regular_hi">इतना नियमित नहीं है</label><br>
             <input type="radio" id="labs_sometimes_hi" name="labs_utilization_hi" value="कभी-कभी_उपयोग_किया_जाता_है">
             <label for="labs_sometimes_hi">कभी-कभी उपयोग किया जाता है</label><br>
+            <input type="radio" id="labs_rarely_hi" name="labs_utilization_hi" value="शायद_ही_कभी_इस्तेमाल_किया">
+            <label for="labs_rarely_hi">शायद ही कभी इस्तेमाल किया</label><br>
             <input type="radio" id="labs_none_hi" name="labs_utilization_hi" value="मेरे_स्कूल_में_लैब_नहीं_है">
             <label for="labs_none_hi">मेरे स्कूल में लैब नहीं है</label><br>
 
