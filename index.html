@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bihar Education Project Questionnaire</title>
+    <style>
+        /* Define Color Palette */
+        :root {
+            --color-primary-blue: #4A90E2; /* Vibrant Blue */
+            --color-secondary-beige: #F5F5DC; /* Soft Beige */
+            --color-background-white: #FFFFFF; /* Pure White */
+            --color-text-black: #333333; /* Dark Grey for text */
+            --color-light-grey: #E0E0E0; /* For borders and subtle accents */
+            --color-accent-gold: #ffc700; /* For stars */
+            --color-accent-gold-hover: #deb217; /* For star hover */
+        }
+
+        /* General Body Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--color-secondary-beige);
+            color: var(--color-text-black);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        /* Header Section Styling */
+     .header-section {
+            background-color: var(--color-primary-blue);
+            color: var(--color-background-white);
+            padding: 30px 40px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+     .header-section h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+     .header-section h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: normal;
+        }
+
+     .header-section p {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        /* Language Switcher Styling */
+     .language-selector-container {
+            text-align: center;
+            margin-bottom: 30px;
+            background-color: var(--color-background-white);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+     .language-selector-container label {
+            display: inline-block;
+            margin: 0 15px;
+            padding: 10px 25px;
+            border: 2px solid var(--color-primary-blue);
+            border-radius: 25px;
+            cursor: pointer;
+            background-color: var(--color-background-white);
+            color: var(--color-primary-blue);
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+        }
+
+     .language-selector-container input[type="radio"] {
+            display: none; /* Hide the actual radio button */
+        }
+
+     .language-selector-container input[type="radio"]:checked + label {
+            background-color: var(--color-primary-blue);
+            color: var(--color-background-white);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+     .language-selector-container label:hover {
+            background-color: var(--color-primary-blue);
+            color: var(--color-background-white);
+            transform: translateY(-2px);
+        }
+
+        /* Questionnaire Section Styling */
+     .questionnaire-section {
+            background-color: var(--color-background-white);
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto 30px auto; /* Center and add bottom margin */
+        }
+
+     .questionnaire-section h3 {
+            color: var(--color-primary-blue);
+            font-size: 1.8em;
+            margin-top: 0;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--color-light-grey);
+            padding-bottom: 10px;
+        }
+
+        /* Form Element Styling */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--color-text-black);
+            font-size: 1em;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: calc(100% - 24px); /* Account for padding and border */
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--color-light-grey);
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1em;
+            color: var(--color-text-black);
+            background-color: #fcfcfc;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus,
+        select:focus {
+            border-color: var(--color-primary-blue);
+            box-shadow: 0 0 8px rgba(74, 144, 226, 0.2);
+            outline: none;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 8px;
+            vertical-align: middle;
+            transform: scale(1.2); /* Slightly larger radio/checkbox */
+            margin-bottom: 10px;
+        }
+
+        input[type="radio"] + label,
+        input[type="checkbox"] + label {
+            display: inline-block;
+            font-weight: normal;
+            margin-bottom: 10px;
+            cursor: pointer;
+            padding-left: 5px;
+        }
+
+        input[type="radio"]:checked + label,
+        input[type="checkbox"]:checked + label {
+            color: var(--color-primary-blue);
+            font-weight: bold;
+        }
+
+        textarea {
+            resize: vertical; /* Allow vertical resizing */
+            min-height: 80px;
+        }
+
+        /* Submit Button Styling */
+        button[type="submit"] {
+            background-color: var(--color-primary-blue);
+            color: var(--color-background-white);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 25px;
+            display: block;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        button[type="submit"]:hover {
+            background-color: #3a7bd5; /* Slightly darker blue on hover */
+            transform: translateY(-2px);
+        }
+
+        /* Star Rating System CSS */
+     .rate {
+            float: left;
+            height: 46px;
+            padding: 0 10px;
+            margin-bottom: 20px; /* Add margin below stars */
+        }
+     .rate:not(:checked) > input {
+            position: absolute;
+            top: -9999px; /* Hide radio buttons */
+        }
+     .rate:not(:checked) > label {
+            float: right;
+            width: 1em;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 30px;
+            color: var(--color-light-grey); /* Unselected star color */
+            transition: color 0.2s ease;
+        }
+     .rate:not(:checked) > label:before {
+            content: '★ '; /* Star character */
+        }
+     .rate > input:checked ~ label {
+            color: var(--color-accent-gold); /* Selected star color */
+        }
+     .rate:not(:checked) > label:hover,
+     .rate:not(:checked) > label:hover ~ label {
+            color: var(--color-accent-gold-hover); /* Hover color */
+        }
+     .rate > input:checked + label:hover,
+     .rate > input:checked + label:hover ~ label,
+     .rate > input:checked ~ label:hover,
+     .rate > input:checked ~ label:hover ~ label,
+     .rate > label:hover ~ input:checked ~ label {
+            color: var(--color-accent-gold-hover); /* More intense hover color */
+        }
+
+        /* Language Toggle Logic */
+        /* Hide the actual radio buttons */
+        input[type="radio"][name="language-choice"] {
+            display: none;
+        }
+
+        /* By default, show English and hide Hindi */
+        #english-questionnaire {
+            display: block;
+        }
+        #hindi-questionnaire {
+            display: none;
+        }
+
+        /* When Hindi radio is checked, hide English and show Hindi */
+        #lang-hi:checked ~ #english-questionnaire {
+            display: none;
+        }
+        #lang-hi:checked ~ #hindi-questionnaire {
+            display: block;
+        }
+
+        /* When English radio is checked, hide Hindi and show English */
+        #lang-en:checked ~ #hindi-questionnaire {
+            display: none;
+        }
+        #lang-en:checked ~ #english-questionnaire {
+            display: block;
+        }
+
+
+        /* Clearfix for floated elements */
+     .rate::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <h1>The Bihar Education Project</h1>
+        <h2>Understanding the Paradox: A Micro-Level Analysis of Fund Utilization Failure in Government Schools</h2>
+        <p>Our Motive & Project Overview</p>
+        <p>Despite significant government expenditure on education in Bihar, the quality of schooling remains a persistent concern. Our research aims to unravel this "Bihar Education Paradox" by conducting a micro-level analysis of how educational funds are utilized at the grassroots level in government schools.</p>
+        <p>We believe that understanding the specific points of fund utilization failure, systemic governance issues, and their direct impact on educational outcomes is crucial for developing evidence-based policy interventions. This project employs a mixed-methods approach, combining quantitative data analysis with qualitative insights from stakeholders like yourself.</p>
+        <p>Your valuable insights as a teacher are central to this study. By sharing your experiences and perceptions through this response sheet, you contribute directly to a comprehensive understanding of the challenges and opportunities for reform in Bihar's education sector.</p>
+    </div>
+
+    <input type="radio" id="lang-en" name="language-choice" value="en" checked>
+    <input type="radio" id="lang-hi" name="language-choice" value="hi">
+
+    <div class="language-selector-container">
+        <label for="lang-en">English</label>
+        <label for="lang-hi">हिंदी</label>
+    </div>
+
+    <div id="english-questionnaire" class="questionnaire-section">
+        <form action="YOUR_FORMSPREE_ENDPOINT" method="POST">
+            <h3>Teacher’s Personal Information (English)</h3>
+            <label for="contact_no_en">Contact No.:</label>
+            <input type="text" id="contact_no_en" name="contact_no_en" placeholder="(optional)"><br>
+
+            <label for="district_en">Your service district:</label>
+            <select id="district_en" name="district_en">
+                <option value="">Select District</option>
+                <option value="araria">Araria</option>
+                <option value="arwal">Arwal</option>
+                <option value="aurangabad">Aurangabad</option>
+                <option value="banka">Banka</option>
+                <option value="begusarai">Begusarai</option>
+                <option value="bhagalpur">Bhagalpur</option>
+                <option value="bhojpur">Bhojpur</option>
+                <option value="buxar">Buxar</option>
+                <option value="darbhanga">Darbhanga</option>
+                <option value="east_champaran">East Champaran</option>
+                <option value="gaya">Gaya</option>
+                <option value="gopalganj">Gopalganj</option>
+                <option value="jamui">Jamui</option>
+                <option value="jehanabad">Jehanabad</option>
+                <option value="kaimur">Kaimur</option>
+                <option value="katihar">Katihar</option>
+                <option value="khagaria">Khagaria</option>
+                <option value="kishanganj">Kishanganj</option>
+                <option value="lakhisarai">Lakhisarai</option>
+                <option value="madhepura">Madhepura</option>
+                <option value="madhubani">Madhubani</option>
+                <option value="munger">Munger</option>
+                <option value="muzaffarpur">Muzaffarpur</option>
+                <option value="nalanda">Nalanda</option>
+                <option value="nawada">Nawada</option>
+                <option value="patna">Patna</option>
+                <option value="purnia">Purnia</option>
+                <option value="rohtas">Rohtas</option>
+                <option value="saharsa">Saharsa</option>
+                <option value="samastipur">Samastipur</option>
+                <option value="saran">Saran</option>
+                <option value="sheikhpura">Sheikhpura</option>
+                <option value="sheohar">Sheohar</option>
+                <option value="sitamarhi">Sitamarhi</option>
+                <option value="siwan">Siwan</option>
+                <option value="supaul">Supaul</option>
+                <option value="vaishali">Vaishali</option>
+                <option value="west_champaran">West Champaran</option>
+            </select><br>
+
+            <label for="school_name_en">Name of School:</label>
+            <input type="text" id="school_name_en" name="school_name_en"><br>
+
+            <label for="service_period_en">Your service period in that school:</label>
+            <input type="text" id="service_period_en" name="service_period_en"><br>
+
+            <p>Your current designation:</p>
+            <input type="radio" id="designation_primary_en" name="designation_en" value="primary_teacher">
+            <label for="designation_primary_en">Primary Teacher</label><br>
+            <input type="radio" id="designation_middle_en" name="designation_en" value="middle_school_teacher">
+            <label for="designation_middle_en">Middle School Teacher</label><br>
+            <input type="radio" id="designation_secondary_en" name="designation_en" value="secondary_teacher">
+            <label for="designation_secondary_en">Secondary Teacher</label><br>
+            <input type="radio" id="designation_headmaster_en" name="designation_en" value="headmaster">
+            <label for="designation_headmaster_en">Headmaster/Headmistress</label><br>
+            <input type="radio" id="designation_para_en" name="designation_en" value="para_teacher">
+            <label for="designation_para_en">Para-Teacher/Contract Teacher</label><br>
+            <input type="radio" id="designation_other_en" name="designation_en" value="other">
+            <label for="designation_other_en">Other (Please specify):</label>
+            <input type="text" id="designation_other_text_en" name="designation_other_text_en" style="margin-left: 5px;"><br>
+
+            <p>Years of Teaching Experience in Government Schools (Bihar):</p>
+            <input type="radio" id="exp_less_3_en" name="teaching_experience_en" value="less_than_3">
+            <label for="exp_less_3_en">Less than 3 years</label><br>
+            <input type="radio" id="exp_3_5_en" name="teaching_experience_en" value="3_5_years">
+            <label for="exp_3_5_en">3-5 years</label><br>
+            <input type="radio" id="exp_6_10_en" name="teaching_experience_en" value="6_10_years">
+            <label for="exp_6_10_en">6-10 years</label><br>
+            <input type="radio" id="exp_11_20_en" name="teaching_experience_en" value="11_20_years">
+            <label for="exp_11_20_en">11-20 years</label><br>
+            <input type="radio" id="exp_more_20_en" name="teaching_experience_en" value="more_than_20">
+            <label for="exp_more_20_en">More than 20 years</label><br>
+
+            <p>School location type:</p>
+            <input type="radio" id="location_rural_en" name="school_location_en" value="rural">
+            <label for="location_rural_en">Rural</label><br>
+            <input type="radio" id="location_urban_en" name="school_location_en" value="urban">
+            <label for="location_urban_en">Urban</label><br>
+
+            <h3>Teacher’s Opinion (English)</h3>
+
+            <p>1) How often is salary given on time?</p>
+            <input type="radio" id="salary_always_en" name="salary_on_time_en" value="always">
+            <label for="salary_always_en">Always on time</label><br>
+            <input type="radio" id="salary_mostly_en" name="salary_on_time_en" value="mostly">
+            <label for="salary_mostly_en">Mostly on time</label><br>
+            <input type="radio" id="salary_sometimes_en" name="salary_on_time_en" value="sometimes">
+            <label for="salary_sometimes_en">Sometimes on time</label><br>
+            <input type="radio" id="salary_rarely_en" name="salary_on_time_en" value="rarely">
+            <label for="salary_rarely_en">Rarely on time</label><br>
+            <input type="radio" id="salary_never_en" name="salary_on_time_en" value="never">
+            <label for="salary_never_en">Never on time</label><br>
+
+            <p>2) Rate the quality of mid-day meal. (5 stars)</p>
+            <div class="rate">
+                <input type="radio" id="mid_day_meal_star5_en" name="mid_day_meal_rating_en" value="5" /><label for="mid_day_meal_star5_en" title="5 stars"></label>
+                <input type="radio" id="mid_day_meal_star4_en" name="mid_day_meal_rating_en" value="4" /><label for="mid_day_meal_star4_en" title="4 stars"></label>
+                <input type="radio" id="mid_day_meal_star3_en" name="mid_day_meal_rating_en" value="3" /><label for="mid_day_meal_star3_en" title="3 stars"></label>
+                <input type="radio" id="mid_day_meal_star2_en" name="mid_day_meal_rating_en" value="2" /><label for="mid_day_meal_star2_en" title="2 stars"></label>
+                <input type="radio" id="mid_day_meal_star1_en" name="mid_day_meal_rating_en" value="1" /><label for="mid_day_meal_star1_en" title="1 star"></label>
+            </div><br>
+
+            <p>3) How would you rate the adequacy of funds your school receives for its daily needs (e.g., teaching materials, maintenance)?</p>
+            <input type="radio" id="funds_adequacy_very_adequate_en" name="funds_adequacy_en" value="very_adequate">
+            <label for="funds_adequacy_very_adequate_en">Very adequate</label><br>
+            <input type="radio" id="funds_adequacy_adequate_en" name="funds_adequacy_en" value="adequate">
+            <label for="funds_adequacy_adequate_en">Adequate</label><br>
+            <input type="radio" id="funds_adequacy_somewhat_adequate_en" name="funds_adequacy_en" value="somewhat_adequate">
+            <label for="funds_adequacy_somewhat_adequate_en">Somewhat adequate</label><br>
+            <input type="radio" id="funds_adequacy_inadequate_en" name="funds_adequacy_en" value="inadequate">
+            <label for="funds_adequacy_inadequate_en">Inadequate</label><br>
+            <input type="radio" id="funds_adequacy_very_inadequate_en" name="funds_adequacy_en" value="very_inadequate">
+            <label for="funds_adequacy_very_inadequate_en">Very inadequate</label><br>
+
+            <p>4) How often do funds allocated to your school arrive on time?</p>
+            <input type="radio" id="funds_arrive_always_en" name="funds_arrive_on_time_en" value="always">
+            <label for="funds_arrive_always_en">Always on time</label><br>
+            <input type="radio" id="funds_arrive_most_en" name="funds_arrive_on_time_en" value="most_of_the_time">
+            <label for="funds_arrive_most_en">Most of the time</label><br>
+            <input type="radio" id="funds_arrive_sometimes_en" name="funds_arrive_on_time_en" value="sometimes">
+            <label for="funds_arrive_sometimes_en">Sometimes on time</label><br>
+            <input type="radio" id="funds_arrive_rarely_en" name="funds_arrive_on_time_en" value="rarely">
+            <label for="funds_arrive_rarely_en">Rarely on time</label><br>
+            <input type="radio" id="funds_arrive_never_en" name="funds_arrive_on_time_en" value="never">
+            <label for="funds_arrive_never_en">Never on time</label><br>
+
+            <p>5) To what extent do you agree with the statement: "Funds received by our school are always utilized efficiently and for their intended purposes."</p>
+            <input type="radio" id="funds_utilized_strongly_agree_en" name="funds_utilized_en" value="strongly_agree">
+            <label for="funds_utilized_strongly_agree_en">Strongly Agree</label><br>
+            <input type="radio" id="funds_utilized_agree_en" name="funds_utilized_en" value="agree">
+            <label for="funds_utilized_agree_en">Agree</label><br>
+            <input type="radio" id="funds_utilized_neutral_en" name="funds_utilized_en" value="neutral">
+            <label for="funds_utilized_neutral_en">Neutral</label><br>
+            <input type="radio" id="funds_utilized_disagree_en" name="funds_utilized_en" value="disagree">
+            <label for="funds_utilized_disagree_en">Disagree</label><br>
+            <input type="radio" id="funds_utilized_strongly_disagree_en" name="funds_utilized_en" value="strongly_disagree">
+            <label for="funds_utilized_strongly_disagree_en">Strongly Disagree</label><br>
+
+            <p>6) If funds are not fully utilized or are diverted, where do you believe this most commonly occurs? (Select any 2)</p>
+            <input type="checkbox" id="fund_diversion_district_en" name="fund_diversion_en" value="district_office">
+            <label for="fund_diversion_district_en">At the district/block education office level (before reaching school)</label><br>
+            <input type="checkbox" id="fund_diversion_procurement_en" name="fund_diversion_en" value="procurement">
+            <label for="fund_diversion_procurement_en">During procurement of materials/services (e.g., inflated costs)</label><br>
+            <input type="checkbox" id="fund_diversion_school_level_en" name="fund_diversion_en" value="school_level">
+            <label for="fund_diversion_school_level_en">At the school level (e.g., unused materials, ghost staff)</label><br>
+            <input type="checkbox" id="fund_diversion_admin_delays_en" name="fund_diversion_en" value="admin_delays">
+            <label for="fund_diversion_admin_delays_en">Due to administrative delays/red tape</label><br>
+            <input type="checkbox" id="fund_diversion_political_en" name="fund_diversion_en" value="political_interference">
+            <label for="fund_diversion_political_en">Political interference</label><br>
+            <input type="checkbox" id="fund_diversion_planning_en" name="fund_diversion_en" value="lack_of_planning">
+            <label for="fund_diversion_planning_en">Lack of proper planning/needs assessment</label><br>
+            <input type="checkbox" id="fund_diversion_other_en" name="fund_diversion_en" value="other">
+            <label for="fund_diversion_other_en">Other (Please specify):</label>
+            <input type="text" id="fund_diversion_other_text_en" name="fund_diversion_other_text_en" style="margin-left: 5px;"><br>
+
+            <p>7) What percentage of teachers in your school (on average) are present on a typical school day?</p>
+            <input type="radio" id="teacher_present_90_100_en" name="teacher_presence_en" value="90-100%">
+            <label for="teacher_present_90_100_en">90-100%</label><br>
+            <input type="radio" id="teacher_present_80_89_en" name="teacher_presence_en" value="80-89%">
+            <label for="teacher_present_80_89_en">80-89%</label><br>
+            <input type="radio" id="teacher_present_70_79_en" name="teacher_presence_en" value="70-79%">
+            <label for="teacher_present_70_79_en">70-79%</label><br>
+            <input type="radio" id="teacher_present_60_69_en" name="teacher_presence_en" value="60-69%">
+            <label for="teacher_present_60_69_en">60-69%</label><br>
+            <input type="radio" id="teacher_present_below_60_en" name="teacher_presence_en" value="below_60%">
+            <label for="teacher_present_below_60_en">Below 60%</label><br>
+
+            <p>8) To what extent do you agree: "Existing mechanisms effectively ensure teacher accountability for attendance and performance."</p>
+            <input type="radio" id="teacher_accountability_strongly_agree_en" name="teacher_accountability_en" value="strongly_agree">
+            <label for="teacher_accountability_strongly_agree_en">Strongly agree</label><br>
+            <input type="radio" id="teacher_accountability_agree_en" name="teacher_accountability_en" value="agree">
+            <label for="teacher_accountability_agree_en">Agree</label><br>
+            <input type="radio" id="teacher_accountability_neutral_en" name="teacher_accountability_en" value="neutral">
+            <label for="teacher_accountability_neutral_en">Neutral</label><br>
+            <input type="radio" id="teacher_accountability_disagree_en" name="teacher_accountability_en" value="disagree">
+            <label for="teacher_accountability_disagree_en">Disagree</label><br>
+            <input type="radio" id="teacher_accountability_strongly_disagree_en" name="teacher_accountability_en" value="strongly_disagree">
+            <label for="teacher_accountability_strongly_disagree_en">Strongly disagree</label><br>
+
+            <p>9) What is the primary reason for teacher absenteeism (if observed) in government schools in Bihar? (Select one)</p>
+            <input type="radio" id="absenteeism_monitoring_en" name="absenteeism_reason_en" value="lack_of_monitoring">
+            <label for="absenteeism_monitoring_en">Lack of effective monitoring</label><br>
+            <input type="radio" id="absenteeism_motivation_en" name="absenteeism_reason_en" value="low_motivation">
+            <label for="absenteeism_motivation_en">Low motivation/poor incentives</label><br>
+            <input type="radio" id="absenteeism_personal_en" name="absenteeism_reason_en" value="personal_reasons">
+            <label for="absenteeism_personal_en">Personal reasons/health issues</label><br>
+            <input type="radio" id="absenteeism_non_teaching_en" name="absenteeism_reason_en" value="non_teaching_duties">
+            <label for="absenteeism_non_teaching_en">Engagement in non-teaching duties</label><br>
+            <input type="radio" id="absenteeism_difficulty_en" name="absenteeism_reason_en" value="difficulty_reaching_school">
+            <label for="absenteeism_difficulty_en">Difficulty in reaching school (transport, infrastructure)</label><br>
+            <input type="radio" id="absenteeism_other_en" name="absenteeism_reason_en" value="other">
+            <label for="absenteeism_other_en">Other (Please specify):</label>
+            <input type="text" id="absenteeism_other_text_en" name="absenteeism_other_text_en" style="margin-left: 5px;"><br>
+
+            <p>10) How would you rate the overall quality of your school's infrastructure (classrooms, toilets, water, etc.)? (5 stars)</p>
+            <div class="rate">
+                <input type="radio" id="infrastructure_star5_en" name="infrastructure_rating_en" value="5" /><label for="infrastructure_star5_en" title="5 stars"></label>
+                <input type="radio" id="infrastructure_star4_en" name="infrastructure_rating_en" value="4" /><label for="infrastructure_star4_en" title="4 stars"></label>
+                <input type="radio" id="infrastructure_star3_en" name="infrastructure_rating_en" value="3" /><label for="infrastructure_star3_en" title="3 stars"></label>
+                <input type="radio" id="infrastructure_star2_en" name="infrastructure_rating_en" value="2" /><label for="infrastructure_star2_en" title="2 stars"></label>
+                <input type="radio" id="infrastructure_star1_en" name="infrastructure_rating_en" value="1" /><label for="infrastructure_star1_en" title="1 star"></label>
+            </div><br>
+
+            <p>11) What percentage of your school's allocated infrastructure (e.g., classrooms, labs, toilets) is fully functional and regularly utilized?</p>
+            <input type="radio" id="infra_functional_90_100_en" name="infra_functional_en" value="90-100%">
+            <label for="infra_functional_90_100_en">90-100%</label><br>
+            <input type="radio" id="infra_functional_70_89_en" name="infra_functional_en" value="70-89%">
+            <label for="infra_functional_70_89_en">70-89%</label><br>
+            <input type="radio" id="infra_functional_50_69_en" name="infra_functional_en" value="50-69%">
+            <label for="infra_functional_50_69_en">50-69%</label><br>
+            <input type="radio" id="infra_functional_30_49_en" name="infra_functional_en" value="30-49%">
+            <label for="infra_functional_30_49_en">30-49%</label><br>
+            <input type="radio" id="infra_functional_below_30_en" name="infra_functional_en" value="below_30%">
+            <label for="infra_functional_below_30_en">Below 30%</label><br>
+
+            <p>12) How often do parents/community members actively participate in School Management Committee (SMC) meetings or school activities?</p>
+            <input type="radio" id="parent_participation_very_frequently_en" name="parent_participation_en" value="very_frequently">
+            <label for="parent_participation_very_frequently_en">Very frequently</label><br>
+            <input type="radio" id="parent_participation_frequently_en" name="parent_participation_en" value="frequently">
+            <label for="parent_participation_frequently_en">Frequently</label><br>
+            <input type="radio" id="parent_participation_sometimes_en" name="parent_participation_en" value="sometimes">
+            <label for="parent_participation_sometimes_en">Sometimes</label><br>
+            <input type="radio" id="parent_participation_rarely_en" name="parent_participation_en" value="rarely">
+            <label for="parent_participation_rarely_en">Rarely</label><br>
+            <input type="radio" id="parent_participation_never_en" name="parent_participation_en" value="never">
+            <label for="parent_participation_never_en">Never</label><br>
+
+            <p>13) What is the single biggest challenge hindering quality education in your school? (Select one)</p>
+            <input type="radio" id="challenge_funding_en" name="biggest_challenge_en" value="insufficient_funding">
+            <label for="challenge_funding_en">Insufficient funding</label><br>
+            <input type="radio" id="challenge_absenteeism_en" name="biggest_challenge_en" value="teacher_absenteeism">
+            <label for="challenge_absenteeism_en">Teacher absenteeism/lack of motivation</label><br>
+            <input type="radio" id="challenge_infrastructure_en" name="biggest_challenge_en" value="poor_infrastructure">
+            <label for="challenge_infrastructure_en">Poor infrastructure</label><br>
+            <input type="radio" id="challenge_admin_en" name="biggest_challenge_en" value="inefficient_admin">
+            <label for="challenge_admin_en">Inefficient administration/governance</label><br>
+            <input type="radio" id="challenge_community_en" name="biggest_challenge_en" value="lack_of_community_support">
+            <label for="challenge_community_en">Lack of community support/engagement</label><br>
+            <input type="radio" id="challenge_student_en" name="biggest_challenge_en" value="student_disinterest">
+            <label for="challenge_student_en">Student disinterest/socio-economic factors</label><br>
+            <input type="radio" id="challenge_other_en" name="challenge_other_en" value="other">
+            <label for="challenge_other_en">Other (Please specify):</label>
+            <input type="text" id="challenge_other_text_en" name="challenge_other_text_en" style="margin-left: 5px;"><br>
+
+            <p>14) Overall, how would you rate the quality of education provided in your government school? (5 stars)</p>
+            <div class="rate">
+                <input type="radio" id="education_quality_star5_en" name="education_quality_rating_en" value="5" /><label for="education_quality_star5_en" title="5 stars"></label>
+                <input type="radio" id="education_quality_star4_en" name="education_quality_rating_en" value="4" /><label for="education_quality_star4_en" title="4 stars"></label>
+                <input type="radio" id="education_quality_star3_en" name="education_quality_rating_en" value="3" /><label for="education_quality_star3_en" title="3 stars"></label>
+                <input type="radio" id="education_quality_star2_en" name="education_quality_rating_en" value="2" /><label for="education_quality_star2_en" title="2 stars"></label>
+                <input type="radio" id="education_quality_star1_en" name="education_quality_rating_en" value="1" /><label for="education_quality_star1_en" title="1 star"></label>
+            </div><br>
+
+            <p>15) Were there any post-covid remedial measures taken to regain the academic loss?</p>
+            <input type="radio" id="covid_remedial_no_en" name="covid_remedial_en" value="not_at_all">
+            <label for="covid_remedial_no_en">Not at all</label><br>
+            <input type="radio" id="covid_remedial_yes_en" name="covid_remedial_en" value="yes">
+            <label for="covid_remedial_yes_en">Yes, specify:</label>
+            <input type="text" id="covid_remedial_text_en" name="covid_remedial_text_en" style="margin-left: 5px;"><br>
+
+            <p>16) On average, how much percentage of students attended classes on regular basis?</p>
+            <input type="radio" id="student_attendance_80_100_en" name="student_attendance_en" value="80-100%">
+            <label for="student_attendance_80_100_en">80-100%</label><br>
+            <input type="radio" id="student_attendance_60_79_en" name="student_attendance_en" value="60-79%">
+            <label for="student_attendance_60_79_en">60-79%</label><br>
+            <input type="radio" id="student_attendance_40_59_en" name="student_attendance_en" value="40-59%">
+            <label for="student_attendance_40_59_en">40-59%</label><br>
+            <input type="radio" id="student_attendance_30_39_en" name="student_attendance_en" value="30-39%">
+            <label for="student_attendance_30_39_en">30-39%</label><br>
+            <input type="radio" id="student_attendance_below_30_en" name="student_attendance_en" value="below_30%">
+            <label for="student_attendance_below_30_en">Below 30%</label><br>
+
+            <p>17) Are the funds allocated for mid-day meals enough?</p>
+            <input type="radio" id="mid_day_meal_funds_more_than_enough_en" name="mid_day_meal_funds_en" value="more_than_enough">
+            <label for="mid_day_meal_funds_more_than_enough_en">More than enough</label><br>
+            <input type="radio" id="mid_day_meal_funds_enough_en" name="mid_day_meal_funds_en" value="enough">
+            <label for="mid_day_meal_funds_enough_en">Enough</label><br>
+            <input type="radio" id="mid_day_meal_funds_sometimes_en" name="mid_day_meal_funds_en" value="sometimes">
+            <label for="mid_day_meal_funds_sometimes_en">Sometimes</label><br>
+            <input type="radio" id="mid_day_meal_funds_rarely_en" name="mid_day_meal_funds_en" value="rarely">
+            <label for="mid_day_meal_funds_rarely_en">Rarely</label><br>
+            <input type="radio" id="mid_day_meal_funds_never_en" name="mid_day_meal_funds_en" value="never">
+            <label for="mid_day_meal_funds_never_en">Never</label><br>
+
+            <label for="weather_difficulties_en">18) What difficulties do you and your students face during harsh weather (e.g., burning heat waves, extreme cold weather, heavy rains, floodings, etc.) days?</label><br>
+            <textarea id="weather_difficulties_en" name="weather_difficulties_en" rows="4" cols="50"></textarea><br>
+
+            <label for="expenses_per_child_en">19) What are the overall expenses per child? And is it adequately utilized?</label><br>
+            <textarea id="expenses_per_child_en" name="expenses_per_child_en" rows="4" cols="50"></textarea><br>
+
+            <p>20) Are there initiatives taken for the development of sports?</p>
+            <input type="radio" id="sports_initiatives_no_en" name="sports_initiatives_en" value="no_nothing">
+            <label for="sports_initiatives_no_en">No/nothing</label><br>
+            <input type="radio" id="sports_initiatives_yes_en" name="sports_initiatives_en" value="yes">
+            <label for="sports_initiatives_yes_en">Yes, specify:</label>
+            <input type="text" id="sports_initiatives_text_en" name="sports_initiatives_text_en" style="margin-left: 5px;"><br>
+
+            <p>21) Is the utilization of labs (Computer lab, biology lab, physis lab, chemistry lab) in your school regular?</p>
+            <input type="radio" id="labs_regular_en" name="labs_utilization_en" value="regular">
+            <label for="labs_regular_en">Regular</label><br>
+            <input type="radio" id="labs_not_so_regular_en" name="labs_utilization_en" value="not_so_regular">
+            <label for="labs_not_so_regular_en">Not so regular</label><br>
+            <input type="radio" id="labs_sometimes_en" name="labs_utilization_en" value="sometimes_used">
+            <label for="labs_sometimes_en">Sometimes used</label><br>
+            <input type="radio" id="labs_rarely_en" name="labs_utilization_en" value="rarely_used">
+            <label for="labs_rarely_en">Rarely used</label><br>
+            <input type="radio" id="labs_none_en" name="labs_utilization_en" value="no_labs">
+            <label for="labs_none_en">My school does not have labs</label><br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div id="hindi-questionnaire" class="questionnaire-section">
+        <form action="YOUR_FORMSPREE_ENDPOINT" method="POST">
+            <h3>शिक्षक की व्यक्तिगत जानकारी (हिंदी)</h3>
+            <label for="contact_no_hi">संपर्क नं।:</label>
+            <input type="text" id="contact_no_hi" name="contact_no_hi" placeholder="(वैकल्पिक)"><br>
+
+            <label for="district_hi">आपका सेवा जिला:</label>
+            <select id="district_hi" name="district_hi">
+                <option value="">जिला चुनें</option>
+                <option value="araria">अररिया</option>
+                <option value="arwal">अरवल</option>
+                <option value="aurangabad">औरंगाबाद</option>
+                <option value="banka">बांका</option>
+                <option value="begusarai">बेगूसराय</option>
+                <option value="bhagalpur">भागलपुर</option>
+                <option value="bhojpur">भोजपुर</option>
+                <option value="buxar">बक्सर</option>
+                <option value="darbhanga">दरभंगा</option>
+                <option value="east_champaran">पूर्वी चंपारण</option>
+                <option value="gaya">गया</option>
+                <option value="gopalganj">गोपालगंज</option>
+                <option value="jamui">जमुई</option>
+                <option value="jehanabad">जहानाबाद</option>
+                <option value="kaimur">कैमूर</option>
+                <option value="katihar">कटिहार</option>
+                <option value="khagaria">खगड़िया</option>
+                <option value="kishanganj">किशनगंज</option>
+                <option value="lakhisarai">लखीसराय</option>
+                <option value="madhepura">मधेपुरा</option>
+                <option value="madhubani">मधुबनी</option>
+                <option value="munger">मुंगेर</option>
+                <option value="muzaffarpur">मुजफ्फरपुर</option>
+                <option value="nalanda">नालंदा</option>
+                <option value="nawada">नवादा</option>
+                <option value="patna">पटना</option>
+                <option value="purnia">पूर्णिया</option>
+                <option value="rohtas">रोहतास</option>
+                <option value="saharsa">सहरसा</option>
+                <option value="samastipur">समस्तीपुर</option>
+                <option value="saran">सारण</option>
+                <option value="sheikhpura">शेखपुरा</option>
+                <option value="sheohar">शिवहर</option>
+                <option value="sitamarhi">सीतामढ़ी</option>
+                <option value="siwan">सीवान</option>
+                <option value="supaul">सुपौल</option>
+                <option value="vaishali">वैशाली</option>
+                <option value="west_champaran">पश्चिमी चंपारण</option>
+            </select><br>
+
+            <label for="school_name_hi">स्कूल का नाम:</label>
+            <input type="text" id="school_name_hi" name="school_name_hi"><br>
+
+            <label for="service_period_hi">उस स्कूल में आपकी सेवा की अवधि:</label>
+            <input type="text" id="service_period_hi" name="service_period_hi"><br>
+
+            <p>आपका वर्तमान पदनाम:</p>
+            <input type="radio" id="designation_primary_hi" name="designation_hi" value="प्राथमिक_शिक्षक">
+            <label for="designation_primary_hi">प्राथमिक शिक्षक</label><br>
+            <input type="radio" id="designation_middle_hi" name="designation_hi" value="मिडिल_स्कूल_टीचर">
+            <label for="designation_middle_hi">मिडिल स्कूल टीचर</label><br>
+            <input type="radio" id="designation_secondary_hi" name="designation_hi" value="माध्यमिक_शिक्षक">
+            <label for="designation_secondary_hi">माध्यमिक शिक्षक</label><br>
+            <input type="radio" id="designation_headmaster_hi" name="designation_hi" value="हेडमास्टर">
+            <label for="designation_headmaster_hi">हेडमास्टर/हेडमिस्ट्रेस</label><br>
+            <input type="radio" id="designation_para_hi" name="designation_hi" value="पैरा_शिक्षक">
+            <label for="designation_para_hi">पैरा-शिक्षक/अनुबंध शिक्षक</label><br>
+            <input type="radio" id="designation_other_hi" name="designation_hi" value="अन्य">
+            <label for="designation_other_hi">अन्य (कृपया निर्दिष्ट करें):</label>
+            <input type="text" id="designation_other_text_hi" name="designation_other_text_hi" style="margin-left: 5px;"><br>
+
+            <p>सरकारी स्कूलों (बिहार) में शिक्षण अनुभव के वर्ष:</p>
+            <input type="radio" id="exp_less_3_hi" name="teaching_experience_hi" value="3_साल_से_कम">
+            <label for="exp_less_3_hi">3 साल से कम</label><br>
+            <input type="radio" id="exp_3_5_hi" name="teaching_experience_hi" value="3-5_साल">
+            <label for="exp_3_5_hi">3-5 साल</label><br>
+            <input type="radio" id="exp_6_10_hi" name="teaching_experience_hi" value="6-10_वर्ष">
+            <label for="exp_6_10_hi">6-10 वर्ष</label><br>
+            <input type="radio" id="exp_11_20_hi" name="teaching_experience_hi" value="11-20_वर्ष">
+            <label for="exp_11_20_hi">11-20 वर्ष</label><br>
+            <input type="radio" id="exp_more_20_hi" name="teaching_experience_hi" value="20_से_अधिक_वर्ष">
+            <label for="exp_more_20_hi">20 से अधिक वर्ष</label><br>
+
+            <p>स्कूल स्थान प्रकार:</p>
+            <input type="radio" id="location_rural_hi" name="school_location_hi" value="ग्रामीण">
+            <label for="location_rural_hi">ग्रामीण</label><br>
+            <input type="radio" id="location_urban_hi" name="school_location_hi" value="शहरी">
+            <label for="location_urban_hi">शहरी</label><br>
+
+            <h3>शिक्षक की राय (हिंदी)</h3>
+
+            <p>1) समय पर वेतन कितनी बार दिया जाता है?</p>
+            <input type="radio" id="salary_always_hi" name="salary_on_time_hi" value="हमेशा_समय_पर">
+            <label for="salary_always_hi">हमेशा समय पर</label><br>
+            <input type="radio" id="salary_mostly_hi" name="salary_on_time_hi" value="ज्यादातर_समय_पर">
+            <label for="salary_mostly_hi">ज्यादातर समय पर</label><br>
+            <input type="radio" id="salary_sometimes_hi" name="salary_on_time_hi" value="कभी-कभी_समय_पर">
+            <label for="salary_sometimes_hi">कभी-कभी समय पर</label><br>
+            <input type="radio" id="salary_rarely_hi" name="salary_on_time_hi" value="शायद_ही_कभी_समय_पर">
+            <label for="salary_rarely_hi">शायद ही कभी समय पर</label><br>
+            <input type="radio" id="salary_never_hi" name="salary_on_time_hi" value="समय_पर_कभी_नहीं">
+            <label for="salary_never_hi">समय पर कभी नहीं</label><br>
+
+            <p>2) मिड-डे भोजन की गुणवत्ता की दर। (5 stars)</p>
+            <div class="rate">
+                <input type="radio" id="mid_day_meal_star5_hi" name="mid_day_meal_rating_hi" value="5" /><label for="mid_day_meal_star5_hi" title="5 stars"></label>
+                <input type="radio" id="mid_day_meal_star4_hi" name="mid_day_meal_rating_hi" value="4" /><label for="mid_day_meal_star4_hi" title="4 stars"></label>
+                <input type="radio" id="mid_day_meal_star3_hi" name="mid_day_meal_rating_hi" value="3" /><label for="mid_day_meal_star3_hi" title="3 stars"></label>
+                <input type="radio" id="mid_day_meal_star2_hi" name="mid_day_meal_rating_hi" value="2" /><label for="mid_day_meal_star2_hi" title="2 stars"></label>
+                <input type="radio" id="mid_day_meal_star1_hi" name="mid_day_meal_rating_hi" value="1" /><label for="mid_day_meal_star1_hi" title="1 star"></label>
+            </div><br>
+
+            <p>3) आप अपने स्कूल को अपनी दैनिक आवश्यकताओं (जैसे, शिक्षण सामग्री, रखरखाव) के लिए प्राप्त धन की पर्याप्तता को कैसे रेट करेंगे?</p>
+            <input type="radio" id="funds_adequacy_very_adequate_hi" name="funds_adequacy_hi" value="बहुत_पर्याप्त_है">
+            <label for="funds_adequacy_very_adequate_hi">बहुत पर्याप्त है</label><br>
+            <input type="radio" id="funds_adequacy_adequate_hi" name="funds_adequacy_hi" value="पर्याप्त">
+            <label for="funds_adequacy_adequate_hi">पर्याप्त</label><br>
+            <input type="radio" id="funds_adequacy_somewhat_adequate_hi" name="funds_adequacy_hi" value="कुछ_हद_तक_पर्याप्त_है">
+            <label for="funds_adequacy_somewhat_adequate_hi">कुछ हद तक पर्याप्त है</label><br>
+            <input type="radio" id="funds_adequacy_inadequate_hi" name="funds_adequacy_hi" value="अपर्याप्त">
+            <label for="funds_adequacy_inadequate_hi">अपर्याप्त</label><br>
+            <input type="radio" id="funds_adequacy_very_inadequate_hi" name="funds_adequacy_hi" value="बहुत_अपर्याप्त">
+            <label for="funds_adequacy_very_inadequate_hi">बहुत अपर्याप्त</label><br>
+
+            <p>4) आपके स्कूल को कितनी बार आवंटित धनराशि समय पर आती है?</p>
+            <input type="radio" id="funds_arrive_always_hi" name="funds_arrive_on_time_hi" value="हमेशा_समय_पर">
+            <label for="funds_arrive_always_hi">हमेशा समय पर</label><br>
+            <input type="radio" id="funds_arrive_most_hi" name="funds_arrive_on_time_hi" value="ज्यादातर_समय">
+            <label for="funds_arrive_most_hi">ज्यादातर समय</label><br>
+            <input type="radio" id="funds_arrive_sometimes_hi" name="funds_arrive_on_time_hi" value="कभी-कभी_समय_पर">
+            <label for="funds_arrive_sometimes_hi">कभी-कभी समय पर</label><br>
+            <input type="radio" id="funds_arrive_rarely_hi" name="funds_arrive_on_time_hi" value="शायद_ही_कभी_समय_पर">
+            <label for="funds_arrive_rarely_hi">शायद ही कभी समय पर</label><br>
+            <input type="radio" id="funds_arrive_never_hi" name="funds_arrive_on_time_hi" value="समय_पर_कभी_नहीं">
+            <label for="funds_arrive_never_hi">समय पर कभी नहीं</label><br>
+
+            <p>5) आप किस हद तक कथन से सहमत हैं: "हमारे स्कूल द्वारा प्राप्त धन हमेशा कुशलतापूर्वक और उनके इच्छित उद्देश्यों के लिए उपयोग किया जाता है।"</p>
+            <input type="radio" id="funds_utilized_strongly_agree_hi" name="funds_utilized_hi" value="दृढ़ता_से_सहमत_हैं">
+            <label for="funds_utilized_strongly_agree_hi">दृढ़ता से सहमत हैं</label><br>
+            <input type="radio" id="funds_utilized_agree_hi" name="funds_utilized_hi" value="सहमत">
+            <label for="funds_utilized_agree_hi">सहमत</label><br>
+            <input type="radio" id="funds_utilized_neutral_hi" name="funds_utilized_hi" value="तटस्थ">
+            <label for="funds_utilized_neutral_hi">तटस्थ</label><br>
+            <input type="radio" id="funds_utilized_disagree_hi" name="funds_utilized_hi" value="असहमत">
+            <label for="funds_utilized_disagree_hi">असहमत</label><br>
+            <input type="radio" id="funds_utilized_strongly_disagree_hi" name="funds_utilized_hi" value="दृढ़ता_से_असहमत">
+            <label for="funds_utilized_strongly_disagree_hi">दृढ़ता से असहमत</label><br>
+
+            <p>6) यदि फंड पूरी तरह से उपयोग नहीं किया जाता है या उन्हें डायवर्ट किया जाता है, तो आप कहां मानते हैं कि यह सबसे अधिक होता है? (किसी भी 2 का चयन करें)</p>
+            <input type="checkbox" id="fund_diversion_district_hi" name="fund_diversion_hi" value="जिला_ब्लॉक_शिक्षा_कार्यालय_स्तर_पर">
+            <label for="fund_diversion_district_hi">जिला / ब्लॉक शिक्षा कार्यालय स्तर पर (स्कूल पहुंचने से पहले)</label><br>
+            <input type="checkbox" id="fund_diversion_procurement_hi" name="fund_diversion_hi" value="सामग्री_सेवाओं_की_खरीद_के_दौरान">
+            <label for="fund_diversion_procurement_hi">सामग्री / सेवाओं की खरीद के दौरान (जैसे, फुलाया हुआ लागत)</label><br>
+            <input type="checkbox" id="fund_diversion_school_level_hi" name="fund_diversion_hi" value="स्कूल_स्तर_पर">
+            <label for="fund_diversion_school_level_hi">स्कूल स्तर पर (जैसे, अप्रयुक्त सामग्री, भूत स्टाफ)</label><br>
+            <input type="checkbox" id="fund_diversion_admin_delays_hi" name="fund_diversion_hi" value="प्रशासनिक_देरी_लाल_टेप_के_कारण">
+            <label for="fund_diversion_admin_delays_hi">प्रशासनिक देरी / लाल टेप के कारण</label><br>
+            <input type="checkbox" id="fund_diversion_political_hi" name="fund_diversion_hi" value="राजनीतिक_हस्तक्षेप">
+            <label for="fund_diversion_political_hi">राजनीतिक हस्तक्षेप</label><br>
+            <input type="checkbox" id="fund_diversion_planning_hi" name="fund_diversion_hi" value="उचित_नियोजन_आवश्यकताओं_के_आकलन_की_कमी">
+            <label for="fund_diversion_planning_hi">उचित नियोजन / आवश्यकताओं के आकलन की कमी</label><br>
+            <input type="checkbox" id="fund_diversion_other_hi" name="fund_diversion_hi" value="अन्य">
+            <label for="fund_diversion_other_hi">अन्य (कृपया निर्दिष्ट करें):</label>
+            <input type="text" id="fund_diversion_other_text_hi" name="fund_diversion_other_text_hi" style="margin-left: 5px;"><br>
+
+            <p>7) एक विशिष्ट स्कूल के दिन आपके स्कूल (औसतन) में कितने प्रतिशत शिक्षक मौजूद हैं?</p>
+            <input type="radio" id="teacher_present_90_100_hi" name="teacher_presence_hi" value="90-100%">
+            <label for="teacher_present_90_100_hi">90-100%</label><br>
+            <input type="radio" id="teacher_present_80_89_hi" name="teacher_presence_hi" value="80-89%">
+            <label for="teacher_present_80_89_hi">80-89%</label><br>
+            <input type="radio" id="teacher_present_70_79_hi" name="teacher_presence_hi" value="70-79%">
+            <label for="teacher_present_70_79_hi">70-79%</label><br>
+            <input type="radio" id="teacher_present_60_69_hi" name="teacher_presence_hi" value="60-69%">
+            <label for="teacher_present_60_69_hi">60-69%</label><br>
+            <input type="radio" id="teacher_present_below_60_hi" name="teacher_presence_hi" value="60%_से_नीचे">
+            <label for="teacher_present_below_60_hi">60% से नीचे</label><br>
+
+            <p>8) आप किस हद तक सहमत हैं: "मौजूदा तंत्र प्रभावी रूप से उपस्थिति और प्रदर्शन के लिए शिक्षक जवाबदेही सुनिश्चित करते हैं।"</p>
+            <input type="radio" id="teacher_accountability_strongly_agree_hi" name="teacher_accountability_hi" value="दृढ़ता_से_सहमत_हैं">
+            <label for="teacher_accountability_strongly_agree_hi">दृढ़ता से सहमत हैं</label><br>
+            <input type="radio" id="teacher_accountability_agree_hi" name="teacher_accountability_hi" value="सहमत">
+            <label for="teacher_accountability_agree_hi">सहमत</label><br>
+            <input type="radio" id="teacher_accountability_neutral_hi" name="teacher_accountability_hi" value="तटस्थ">
+            <label for="teacher_accountability_neutral_hi">तटस्थ</label><br>
+            <input type="radio" id="teacher_accountability_disagree_hi" name="teacher_accountability_hi" value="असहमत">
+            <label for="teacher_accountability_disagree_hi">असहमत</label><br>
+            <input type="radio" id="teacher_accountability_strongly_disagree_hi" name="teacher_accountability_hi" value="दृढ़ता_से_असहमत">
+            <label for="teacher_accountability_strongly_disagree_hi">दृढ़ता से असहमत</label><br>
+
+            <p>9) बिहार में सरकारी स्कूलों में शिक्षक अनुपस्थिति (यदि मनाया गया) का प्राथमिक कारण क्या है? (एक का चयन करें)</p>
+            <input type="radio" id="absenteeism_monitoring_hi" name="absenteeism_reason_hi" value="प्रभावी_निगरानी_की_कमी">
+            <label for="absenteeism_monitoring_hi">प्रभावी निगरानी की कमी</label><br>
+            <input type="radio" id="absenteeism_motivation_hi" name="absenteeism_reason_hi" value="कम_प्रेरणा_खराब_प्रोत्साहन">
+            <label for="absenteeism_motivation_hi">कम प्रेरणा / खराब प्रोत्साहन</label><br>
+            <input type="radio" id="absenteeism_personal_hi" name="absenteeism_reason_hi" value="व्यक्तिगत_कारण_स्वास्थ्य_के_मुद्दे">
+            <label for="absenteeism_personal_hi">व्यक्तिगत कारण / स्वास्थ्य के मुद्दे</label><br>
+            <input type="radio" id="absenteeism_non_teaching_hi" name="absenteeism_reason_hi" value="गैर-शिक्षण_कर्तव्यों_में_सगाई">
+            <label for="absenteeism_non_teaching_hi">गैर-शिक्षण कर्तव्यों में सगाई</label><br>
+            <input type="radio" id="absenteeism_difficulty_hi" name="absenteeism_reason_hi" value="स्कूल_तक_पहुंचने_में_कठिनाई">
+            <label for="absenteeism_difficulty_hi">स्कूल तक पहुंचने में कठिनाई (परिवहन, बुनियादी ढांचा)</label><br>
+            <input type="radio" id="absenteeism_other_hi" name="absenteeism_other_hi" value="अन्य">
+            <label for="absenteeism_other_hi">अन्य (कृपया निर्दिष्ट करें):</label>
+            <input type="text" id="absenteeism_other_text_hi" name="absenteeism_other_text_hi" style="margin-left: 5px;"><br>
+
+            <p>10) आप अपने स्कूल के बुनियादी ढांचे (कक्षाओं, शौचालय, पानी, आदि) की समग्र गुणवत्ता को कैसे रेट करेंगे? (5 stars)</p>
+            <div class="rate">
+                <input type="radio" id="infrastructure_star5_hi" name="infrastructure_rating_hi" value="5" /><label for="infrastructure_star5_hi" title="5 stars"></label>
+                <input type="radio" id="infrastructure_star4_hi" name="infrastructure_rating_hi" value="4" /><label for="infrastructure_star4_hi" title="4 stars"></label>
+                <input type="radio" id="infrastructure_star3_hi" name="infrastructure_rating_hi" value="3" /><label for="infrastructure_star3_hi" title="3 stars"></label>
+                <input type="radio" id="infrastructure_star2_hi" name="infrastructure_rating_hi" value="2" /><label for="infrastructure_star2_hi" title="2 stars"></label>
+                <input type="radio" id="infrastructure_star1_hi" name="infrastructure_rating_hi" value="1" /><label for="infrastructure_star1_hi" title="1 star"></label>
+            </div><br>
+
+            <p>11) आपके स्कूल के आवंटित बुनियादी ढांचे का कितना प्रतिशत (जैसे, कक्षा, प्रयोगशाला, शौचालय) पूरी तरह से कार्यात्मक और नियमित रूप से उपयोग किया जाता है?</p>
+            <input type="radio" id="infra_functional_90_100_hi" name="infra_functional_hi" value="90-100%">
+            <label for="infra_functional_90_100_hi">90-100%</label><br>
+            <input type="radio" id="infra_functional_70_89_hi" name="infra_functional_hi" value="70-89%">
+            <label for="infra_functional_70_89_hi">70-89%</label><br>
+            <input type="radio" id="infra_functional_50_69_hi" name="infra_functional_hi" value="50-69%">
+            <label for="infra_functional_50_69_hi">50-69%</label><br>
+            <input type="radio" id="infra_functional_30_49_hi" name="infra_functional_hi" value="30-49%">
+            <label for="infra_functional_30_49_hi">30-49%</label><br>
+            <input type="radio" id="infra_functional_below_30_hi" name="infra_functional_hi" value="30%_से_नीचे">
+            <label for="infra_functional_below_30_hi">30% से नीचे</label><br>
+
+            <p>12) माता-पिता/समुदाय के सदस्य स्कूल प्रबंधन समिति (एसएमसी) की बैठकों या स्कूल गतिविधियों में कितनी बार सक्रिय रूप से भाग लेते हैं?</p>
+            <input type="radio" id="parent_participation_very_frequently_hi" name="parent_participation_hi" value="बहुत_बार">
+            <label for="parent_participation_very_frequently_hi">बहुत बार</label><br>
+            <input type="radio" id="parent_participation_frequently_hi" name="parent_participation_hi" value="अक्सर">
+            <label for="parent_participation_frequently_hi">अक्सर</label><br>
+            <input type="radio" id="parent_participation_sometimes_hi" name="parent_participation_hi" value="कभी-कभी">
+            <label for="parent_participation_sometimes_hi">कभी-कभी</label><br>
+            <input type="radio" id="parent_participation_rarely_hi" name="parent_participation_hi" value="शायद_ही_कभी">
+            <label for="parent_participation_rarely_hi">शायद ही कभी</label><br>
+            <input type="radio" id="parent_participation_never_hi" name="parent_participation_hi" value="कभी_नहीं">
+            <label for="parent_participation_never_hi">कभी नहीं</label><br>
+
+            <p>13) आपके स्कूल में गुणवत्तापूर्ण शिक्षा में बाधा डालने वाली सबसे बड़ी चुनौती क्या है? (एक का चयन करें)</p>
+            <input type="radio" id="challenge_funding_hi" name="biggest_challenge_hi" value="अपर्याप्त_धन">
+            <label for="challenge_funding_hi">अपर्याप्त धन</label><br>
+            <input type="radio" id="challenge_absenteeism_hi" name="biggest_challenge_hi" value="शिक्षक_अनुपस्थिति_प्रेरणा_की_कमी">
+            <label for="challenge_absenteeism_hi">शिक्षक अनुपस्थिति / प्रेरणा की कमी</label><br>
+            <input type="radio" id="challenge_infrastructure_hi" name="biggest_challenge_hi" value="गरीब_बुनियादी_ढांचा">
+            <label for="challenge_infrastructure_hi">गरीब बुनियादी ढांचा</label><br>
+            <input type="radio" id="challenge_admin_hi" name="biggest_challenge_hi" value="अक्षम_प्रशासन_शासन">
+            <label for="challenge_admin_hi">अक्षम प्रशासन / शासन</label><br>
+            <input type="radio" id="challenge_community_hi" name="biggest_challenge_hi" value="सामुदायिक_समर्थन_सगाई_की_कमी">
+            <label for="challenge_community_hi">सामुदायिक समर्थन / सगाई की कमी</label><br>
+            <input type="radio" id="challenge_student_hi" name="challenge_student_hi" value="छात्र_उदासीन_सामाजिक-आर्थिक_कारक">
+            <label for="challenge_student_hi">छात्र उदासीन / सामाजिक-आर्थिक कारक</label><br>
+            <input type="radio" id="challenge_other_hi" name="challenge_other_hi" value="अन्य">
+            <label for="challenge_other_hi">अन्य (कृपया निर्दिष्ट करें):</label>
+            <input type="text" id="challenge_other_text_hi" name="challenge_other_text_hi" style="margin-left: 5px;"><br>
+
+            <p>14) कुल मिलाकर, आप अपने सरकारी स्कूल में प्रदान की गई शिक्षा की गुणवत्ता को कैसे रेट करेंगे? (5 stars)</p>
+            <div class="rate">
+                <input type="radio" id="education_quality_star5_hi" name="education_quality_rating_hi" value="5" /><label for="education_quality_star5_hi" title="5 stars"></label>
+                <input type="radio" id="education_quality_star4_hi" name="education_quality_rating_hi" value="4" /><label for="education_quality_star4_hi" title="4 stars"></label>
+                <input type="radio" id="education_quality_star3_hi" name="education_quality_rating_hi" value="3" /><label for="education_quality_star3_hi" title="3 stars"></label>
+                <input type="radio" id="education_quality_star2_hi" name="education_quality_rating_hi" value="2" /><label for="education_quality_star2_hi" title="2 stars"></label>
+                <input type="radio" id="education_quality_star1_hi" name="education_quality_rating_hi" value="1" /><label for="education_quality_star1_hi" title="1 star"></label>
+            </div><br>
+
+            <p>15) क्या अकादमिक नुकसान को फिर से हासिल करने के लिए कोई पोस्ट-कोविड उपचारात्मक उपाय किए गए थे?</p>
+            <input type="radio" id="covid_remedial_no_hi" name="covid_remedial_hi" value="बिल्कुल_नहीं">
+            <label for="covid_remedial_no_hi">बिल्कुल नहीं</label><br>
+            <input type="radio" id="covid_remedial_yes_hi" name="covid_remedial_hi" value="हाँ">
+            <label for="covid_remedial_yes_hi">हाँ, निर्दिष्ट करें:</label>
+            <input type="text" id="covid_remedial_text_hi" name="covid_remedial_text_hi" style="margin-left: 5px;"><br>
+
+            <p>16) औसतन, छात्रों का कितना प्रतिशत नियमित रूप से कक्षाओं में भाग लिया?</p>
+            <input type="radio" id="student_attendance_80_100_hi" name="student_attendance_hi" value="80-100%">
+            <label for="student_attendance_80_100_hi">80-100%</label><br>
+            <input type="radio" id="student_attendance_60_79_hi" name="student_attendance_hi" value="60-79%">
+            <label for="student_attendance_60_79_hi">60-79%</label><br>
+            <input type="radio" id="student_attendance_40_59_hi" name="student_attendance_hi" value="40-59%">
+            <label for="student_attendance_40_59_hi">40-59%</label><br>
+            <input type="radio" id="student_attendance_30_39_hi" name="student_attendance_hi" value="30-39%">
+            <label for="student_attendance_30_39_hi">30-39%</label><br>
+            <input type="radio" id="student_attendance_below_30_hi" name="student_attendance_hi" value="30%_से_नीचे">
+            <label for="student_attendance_below_30_hi">30% से नीचे</label><br>
+
+            <p>17) क्या मिड-डे भोजन के लिए धन पर्याप्त होता है?</p>
+            <input type="radio" id="mid_day_meal_funds_more_than_enough_hi" name="mid_day_meal_funds_hi" value="पर्याप्त_से_अधिक">
+            <label for="mid_day_meal_funds_more_than_enough_hi">पर्याप्त से अधिक</label><br>
+            <input type="radio" id="mid_day_meal_funds_enough_hi" name="mid_day_meal_funds_hi" value="पर्याप्त">
+            <label for="mid_day_meal_funds_enough_hi">पर्याप्त</label><br>
+            <input type="radio" id="mid_day_meal_funds_sometimes_hi" name="mid_day_meal_funds_hi" value="कभी-कभी">
+            <label for="mid_day_meal_funds_sometimes_hi">कभी-कभी</label><br>
+            <input type="radio" id="mid_day_meal_funds_rarely_hi" name="mid_day_meal_funds_hi" value="शायद_ही_कभी">
+            <label for="mid_day_meal_funds_rarely_hi">शायद ही कभी</label><br>
+            <input type="radio" id="mid_day_meal_funds_never_hi" name="mid_day_meal_funds_hi" value="कभी_नहीं">
+            <label for="mid_day_meal_funds_never_hi">कभी नहीं</label><br>
+
+            <label for="weather_difficulties_hi">18) आप और आपके छात्रों को कठोर मौसम (जैसे, गर्मी की लहरों, अत्यधिक ठंड के मौसम, भारी बारिश, बाढ़, आदि) के दौरान क्या कठिनाइयों का सामना करना पड़ता है?</label><br>
+            <textarea id="weather_difficulties_hi" name="weather_difficulties_hi" rows="4" cols="50"></textarea><br>
+
+            <label for="expenses_per_child_hi">19) प्रति बच्चे के लिए क्या खर्च हैं? और क्या यह पर्याप्त रूप से उपयोग किया जाता है?</label><br>
+            <textarea id="expenses_per_child_hi" name="expenses_per_child_hi" rows="4" cols="50"></textarea><br>
+
+            <p>20) क्या खेल के विकास के लिए पहल की गई है?</p>
+            <input type="radio" id="sports_initiatives_no_hi" name="sports_initiatives_hi" value="नहीं_कुछ_भी_नहीं">
+            <label for="sports_initiatives_no_hi">नहीं / कुछ भी नहीं</label><br>
+            <input type="radio" id="sports_initiatives_yes_hi" name="sports_initiatives_hi" value="हाँ">
+            <label for="sports_initiatives_yes_hi">हाँ, निर्दिष्ट करें:</label>
+            <input type="text" id="sports_initiatives_text_hi" name="sports_initiatives_text_hi" style="margin-left: 5px;"><br>
+
+            <p>21) क्या आपके स्कूल में नियमित रूप से प्रयोगशालाओं (कंप्यूटर लैब, बायोलॉजी लैब, फिजिस लैब, केमिस्ट्री लैब) का उपयोग है?</p>
+            <input type="radio" id="labs_regular_hi" name="labs_utilization_hi" value="नियमित">
+            <label for="labs_regular_hi">नियमित</label><br>
+            <input type="radio" id="labs_not_so_regular_hi" name="labs_utilization_hi" value="इतना_नियमित_नहीं_है">
+            <label for="labs_not_so_regular_hi">इतना नियमित नहीं है</label><br>
+            <input type="radio" id="labs_sometimes_hi" name="labs_utilization_hi" value="कभी-कभी_उपयोग_किया_जाता_है">
+            <label for="labs_sometimes_hi">कभी-कभी उपयोग किया जाता है</label><br>
+            <input type="radio" id="labs_none_hi" name="labs_utilization_hi" value="मेरे_स्कूल_में_लैब_नहीं_है">
+            <label for="labs_none_hi">मेरे स्कूल में लैब नहीं है</label><br>
+
+            <button type="submit">जमा करें</button>
+        </form>
+    </div>
+</body>
+</html>
